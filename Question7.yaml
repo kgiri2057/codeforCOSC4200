@@ -1,0 +1,142 @@
+name: turningmachine
+source code: |-
+  input: '0011#1101#001#00110#0101'
+  blank: ' '
+  start state: qstart
+  table:
+    qstart:
+      0: {write: x, R: q0}
+      1: {write: y, R: q1}
+      x: R
+      y: R
+      m: {L: qw}
+      
+      
+    q0:
+      [0,1] : R
+      '#' : {R: q0m}
+      m: R
+      ' ': {L: qrej}
+      
+    qrej:
+      [0,1]: L
+      m: {write: '#', L}
+      x: {write: 0, L}
+      y: {write: 1, L}
+      '#' : L
+      
+      
+    
+    
+    q1:
+      [0,1] : R
+      '#' : {R: q1m}
+      m: R
+      
+      
+    q0m:
+      1: {L: qfix}
+      0: {write: x, L: q0m1}
+      x: R
+      y: R
+      
+      
+      
+    
+    
+    q1m:
+      0: {L: qfix}
+      1: {write: y, L: q1m1}
+      x: R
+      y: R
+      '#': {L: qfix}
+      ' ': {L: qrej}
+      
+      
+    qfix:
+      x: {write: 0, L}
+      y: {write: 1, L}
+      [0,1] : L
+      '#': {write: m, L}
+      ' ': {R: qstart}
+      m: L
+      
+      
+    q0m1:
+      [1,0,x,m,y,'#'] : L
+      ' ': {R: qstart}
+    
+    
+    q1m1:
+      [1,0,x,m,y,'#'] : L
+      ' ': {R: qstart}
+      
+      
+    qw:
+      y: {write: 1, L}
+      x: {write: 0, L}
+      ' ': R
+      [0,1]: R
+      m: {L: qw1}
+      
+    qw1:
+      [0,1]: R
+      m: {write: '#', R}
+      '#': {write: $, R: q$}
+      
+    q$:
+      x: {write: 0,R}
+      y: {write: 1, R}
+      [0,1,'#']: R
+      ' ': {R: qaccept}
+      
+    qaccept:
+    
+      
+      
+      
+      
+      
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+positions:
+  qstart: {x: 30.1, y: 331.33}
+  q0: {x: 163.23, y: 217.17}
+  qrej: {x: 250.14, y: 121.2}
+  q1: {x: 170.85, y: 471.03}
+  q0m: {x: 311.14, y: 168.33}
+  q1m: {x: 348.47, y: 470.64}
+  qfix: {x: 583.63, y: 298.55}
+  q0m1: {x: 501.13, y: 150}
+  q1m1: {x: 524.22, y: 471.64}
+  qw: {x: 251.74, y: 305.21}
+  qw1: {x: 437.15, y: 272.49}
+  q$: {x: 701.12, y: 130.34}
+  qaccept: {x: 745.9, y: 428.24}
