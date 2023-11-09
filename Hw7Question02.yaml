@@ -1,0 +1,71 @@
+name: compute2n
+source code: |
+  input: '111'
+  blank: ' '
+  start state: q0
+  table:
+    q0:
+      1: R
+      ' ' : { write: '#', L: q1}
+    q1:
+      [1,'#'] : L
+      ' ' : {R: q2}
+    q2:
+      1: {write: 'x' , R: q3}
+      '#': {L: final}
+    q3:
+      ' ': {write: y, R: q4}
+      [1, '#']: R
+      y: {write: x, R: q6}
+      x: {write: y, L: q8}
+      
+    q4:
+      ' ': { write: y, L: q5}
+    q5:
+      [1,'#', 'y' ] : L
+      x : { R: q2}
+    q6:
+      y: R
+      ' ': {write: x , L: q7}
+      x: R
+      
+    q7:
+      y: L
+      x: L
+      '#' : {R: q10}
+      
+    q8:
+      x: {write: y, L}
+      '#' : {L: q9}
+      
+    q9:
+      x: {R: q2}
+      1: L
+      
+    q10:
+      x: R
+      y: {write: x, R: q6}
+      ' ': {L: q8}
+      
+    final:
+      x: {write: ' ', L}
+      ' ': R
+      '#': {write: ' ', R: accept}
+    accept:
+      y: {write: 1, R} 
+      
+     
+positions:
+  q0: {x: 156.79, y: 83.31}
+  q1: {x: 236.01, y: 161.39}
+  q2: {x: 421.12, y: 264.84}
+  q3: {x: 435.32, y: 432.2}
+  q4: {x: 619.05, y: 242.3}
+  q5: {x: 620.05, y: 103.39}
+  q6: {x: 285.15, y: 478.22}
+  q7: {x: 92.29, y: 439.15}
+  q8: {x: 579.38, y: 386.71}
+  q9: {x: 713.77, y: 284.36}
+  q10: {x: 222.91, y: 292.05}
+  final: {x: 377.08, y: 135.37}
+  accept: {x: 513.15, y: 140.14}
